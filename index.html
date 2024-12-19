@@ -5,13 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirigiendo a YouTube...</title>
     <style>
-        body { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; }
-        #manualButton { display: none; padding: 10px 20px; font-size: 18px; cursor: pointer; }
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        #manualButton {
+            display: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        #instructions {
+            display: none;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <p id="message">Intentando abrir YouTube...</p>
     <button id="manualButton" onclick="redirigir()">Abrir en YouTube</button>
+    <div id="instructions">
+        <p>Si no puedes abrir YouTube, sigue estos pasos:</p>
+        <ol>
+            <li>Haz clic en el icono de los tres puntos (⋮) en la parte superior derecha.</li>
+            <li>Selecciona <b>"Abrir en el navegador"</b>.</li>
+            <li>Intenta abrir el enlace nuevamente.</li>
+        </ol>
+    </div>
 
     <script type="text/javascript">
         function redirigir() {
@@ -19,13 +43,14 @@
         }
 
         // Intenta redirigir automáticamente
-        window.onload = function() {
+        window.onload = function () {
             redirigir();
 
-            // Si después de 1.5 segundos no se abre, muestra el botón
-            setTimeout(function() {
-                document.getElementById("message").innerText = "Si no se abre automáticamente, haz clic en el botón.";
+            // Si después de 1.5 segundos no se abre, muestra el botón y las instrucciones
+            setTimeout(function () {
+                document.getElementById("message").innerText = "Si no se abre automáticamente, haz clic en el botón o sigue las instrucciones.";
                 document.getElementById("manualButton").style.display = "block";
+                document.getElementById("instructions").style.display = "block";
             }, 1500);
         };
     </script>
