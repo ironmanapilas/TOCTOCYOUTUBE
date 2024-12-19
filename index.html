@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
-    <script>
-        window.onload = function() {
-            // Intentar redirigir al deep link usando un iframe oculto
-            var iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = "youtube://R5Q4wTM1ze0";
-            document.body.appendChild(iframe);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const url = "https://www.youtube.com/watch?v=R5Q4wTM1ze0";
+      const deepLink = "youtube://www.youtube.com/watch?v=R5Q4wTM1ze0";
+      
+      // Detect if the user is on Instagram
+      const isInstagram = navigator.userAgent.toLowerCase().includes("instagram");
+      const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
 
-            // Si después de 1 segundo no funciona, redirigir al navegador
-            setTimeout(function() {
-                window.location.href = "https://www.youtube.com/watch?v=R5Q4wTM1ze0";
-            }, 1000);
-        };
-    </script>
+      if (isInstagram && isMobile) {
+        // Instagram on mobile: redirect to the YouTube app
+        window.location.href = deepLink;
+      } else if (isMobile) {
+        // Mobile devices: try redirecting to YouTube app, fallback to browser
+        window.location.href = deepLink;
+        setTimeout(() => {
+          window.location.href = url;
+        }, 1000); // 1-second delay to fallback
+      } else {
+        // Desktop: redirect to the main URL
+        window.location.href = url;
+      }
+    });
+  </script>
 </head>
 <body>
-    <p>Redirigiendo al video en YouTube. Si no ocurre nada, <a href="https://www.youtube.com/watch?v=R5Q4wTM1ze0">haz clic aquí para verlo en el navegador</a>.</p>
+  <p>Redirecting you to YouTube...</p>
 </body>
 </html>
