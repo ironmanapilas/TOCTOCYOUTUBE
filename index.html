@@ -3,10 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=youtube://R5Q4wTM1ze0">
     <title>Redirecting...</title>
+    <script>
+        window.onload = function() {
+            // Intentar redirigir al deep link
+            window.location.href = "youtube://R5Q4wTM1ze0";
+            // Si después de 1 segundo no funciona, redirigir al navegador
+            setTimeout(function() {
+                window.location.href = "https://www.youtube.com/watch?v=R5Q4wTM1ze0";
+            }, 1000);
+        };
+    </script>
 </head>
 <body>
-    <p>Redirigiendo al video en YouTube. Si no ocurre nada, asegúrate de tener la aplicación de YouTube instalada y <a href="youtube://R5Q4wTM1ze0">haz clic aquí</a>.</p>
+    <p>Redirigiendo al video en YouTube. Si no ocurre nada, <a href="https://www.youtube.com/watch?v=R5Q4wTM1ze0">haz clic aquí para verlo en el navegador</a>.</p>
 </body>
 </html>
