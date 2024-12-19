@@ -6,8 +6,12 @@
     <title>Redirecting...</title>
     <script>
         window.onload = function() {
-            // Intentar redirigir al deep link
-            window.location.href = "youtube://R5Q4wTM1ze0";
+            // Intentar redirigir al deep link usando un iframe oculto
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = "youtube://R5Q4wTM1ze0";
+            document.body.appendChild(iframe);
+
             // Si después de 1 segundo no funciona, redirigir al navegador
             setTimeout(function() {
                 window.location.href = "https://www.youtube.com/watch?v=R5Q4wTM1ze0";
