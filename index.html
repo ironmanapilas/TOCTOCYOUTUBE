@@ -1,44 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting...</title>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const url = "https://www.youtube.com/watch?v=R5Q4wTM1ze0";
-      const deepLink = "youtube://www.youtube.com/watch?v=R5Q4wTM1ze0";
-
-      // Detect if the user is on Instagram
-      const isInstagram = navigator.userAgent.toLowerCase().includes("instagram");
-      const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
-
-      if (isInstagram && isMobile) {
-        // Instagram on mobile: try redirecting to the YouTube app
-        setTimeout(() => {
-          const body = document.body;
-          body.innerHTML = `
-            <p>If you are not redirected, click below to open YouTube:</p>
-            <form action="${deepLink}" method="GET">
-              <button type="submit">Open in YouTube App</button>
-            </form>
-            <p>Or, <a href="${url}" target="_blank">click here to open in your browser</a>.</p>
-          `;
-        }, 1000); // 1-second delay
-      } else if (isMobile) {
-        // Mobile devices: try redirecting to YouTube app, fallback to browser
-        window.location.href = deepLink;
-        setTimeout(() => {
-          window.location.href = url;
-        }, 1000); // 1-second delay to fallback
-      } else {
-        // Desktop: redirect to the main URL
-        window.location.href = url;
-      }
-    });
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigiendo a YouTube...</title>
+    <style>
+        body { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; }
+        #manualButton { display: none; padding: 10px 20px; font-size: 18px; cursor: pointer; }
+    </style>
 </head>
 <body>
-  <p>Redirecting you to YouTube...</p>
+    <p id="message">Intentando abrir YouTube...</p>
+    <button id="manualButton" onclick="redirigir()">Abrir en YouTube</button>
+
+    <script type="text/javascript">
+        function redirigir() {
+            window.location.href = "youtube://www.youtube.com/watch?v=R5Q4wTM1ze0";
+        }
+
+        // Intenta redirigir automáticamente
+        window.onload = function() {
+            redirigir();
+
+            // Si después de 1.5 segundos no se abre, muestra el botón
+            setTimeout(function() {
+                document.getElementById("message").innerText = "Si no se abre automáticamente, haz clic en el botón.";
+                document.getElementById("manualButton").style.display = "block";
+            }, 1500);
+        };
+    </script>
 </body>
 </html>
